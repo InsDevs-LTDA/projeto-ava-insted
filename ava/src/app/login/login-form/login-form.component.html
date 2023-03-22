@@ -1,0 +1,64 @@
+<form
+  class="flex justify-center items-center flex-col box-border shadow-2xl shadow-branco_transp bg-branco_transp h-1/2 w-[88%] rounded-3xl border-branco border-[2px]"
+>
+  <div class="flex flex-col justify-between items-center h-2/3 w-full">
+    <div class="flex flex-col w-full justify-center h-2/3 items-center gap-8">
+      <div class="flex flex-col w-full justify-center items-center py-2">
+        <input
+          formControlName="ra"
+          required
+          placeholder="Insira seu RA"
+          class="relative placeholder:text-branco_transp outline-none placeholder:text-center placeholder:items-center text-xl font-semibold border-branco border-[2px] bg-verde_insted text-branco w-[92%] box-border rounded-2xl p-3"
+        />
+        <div class="absolute top-[40%] font-semibold text-texto_invalido">
+          O RA é obrigatório.
+        </div>
+        <div class="absolute top-[51%] font-semibold text-texto_invalido">
+          O RA deve ter no mínimo 10 números.
+        </div>
+      </div>
+      <div class="flex flex-col justify-center items-center relative w-full">
+        <div class="flex flex-col w-full justify-center items-center">
+          <input
+            required
+            id="password"
+            formControlName="password"
+            type="password"
+            autocomplete="on"
+            class="relative placeholder:text-branco_transp outline-none placeholder:text-center placeholder:items-center text-xl font-semibold border-branco border-[2px] bg-verde_insted text-branco w-[92%] box-border rounded-2xl p-3"
+            placeholder="Insira sua senha"
+          />
+          <svg
+            id="icon"
+            class="bg-olho_aberto absolute top-50% right-[8%] bg-contain bg-center bg-no-repeat w-10 h-10 cursor-pointer"
+          ></svg>
+        </div>
+        <div class="absolute top-[105%] font-semibold text-texto_invalido">
+          A senha é obrigatória.
+        </div>
+        <div class="absolute top-[105%] font-semibold text-texto_invalido">
+          O senha deve ter no mínimo 06 números.
+        </div>
+      </div>
+      <div class="flex flex-row justify-center items-center">
+        <input
+          type="checkbox"
+          id="checkbox1"
+          class="hover:cursor-pointer peer relative appearance-none w-6 h-6 box-content border-branco border-[2px] rounded-xl focus:outline-none mx-2 bg-verde_insted checked:bg-branco_transp checked:bg-opacity-0 checked:border-opacity-0 checked:bg-no-repeat checked:transition-all transition ease-linear delay-0 checked:bg-center checked:bg-contain checked:bg-checkmark"
+        />
+        <label for="checkbox1" class="text-verde_insted font-semibold"
+          >Manter-me conectado</label
+        >
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="bg-verde_insted relative overflow-hidden border-branco border-[2px] w-1/2 rounded-3xl p-3 text-2xl font-semibold text-branco"
+    >
+      Entrar
+    </button>
+  </div>
+  <p class="my-4 text-verde_insted font-semibold underline underline-offset-1">
+    Esqueci minha senha
+  </p>
+</form>
