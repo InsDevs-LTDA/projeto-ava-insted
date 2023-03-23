@@ -20,17 +20,17 @@ export class ForgotPasswordFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.formBuilder.group({
-      ra: ['', [CustomValidations.minLengthRa]],
+      ra: ['', [Validators.minLength(10)]],
       email: ['', [Validators.email]],
-      cpf: ['', [CustomValidations?.validateCpf]],
+      cpf: ['', [CustomValidations.validateCpf]],
     });
   }
 
   recoverPassword() {
     const recoverPassword =
       this.forgotPasswordForm.getRawValue() as LoginInterface;
-  console.log(CustomValidations.validateCpf);
-    }
+    console.log(CustomValidations.validateCpf);
+  }
   verificarInputs(e: KeyboardEvent) {
     if (this.ra != '' || this.email != '' || this.cpf != '') {
       this.someInputFilled = true;

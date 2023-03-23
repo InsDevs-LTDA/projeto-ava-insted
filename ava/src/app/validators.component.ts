@@ -1,7 +1,6 @@
 import { AbstractControl } from '@angular/forms';
 
 export class CustomValidations {
-
   static validateCpf(control: AbstractControl) {
     const cpf = control.value as string;
     let sum: number = 0;
@@ -49,18 +48,5 @@ export class CustomValidations {
     if (isValid) return null;
 
     return { isCpfInvalid: true };
-  }
-
-  static minLengthRa(control: AbstractControl) {
-    const content = control.value as string;
-
-    if (content.length < 1) {
-      return null;
-    }
-    if (content.length >= 10) {
-      return null;
-    } else {
-      return { lessThenTen: true };
-    }
   }
 }

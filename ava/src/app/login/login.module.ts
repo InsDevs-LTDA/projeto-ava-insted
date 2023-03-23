@@ -7,7 +7,6 @@ import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-passw
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from '../message/message.module';
 import { InputRestrictionDirective } from 'app/input-restriction.directive';
-import { InputModule } from 'app/input/input.module';
 
 @NgModule({
   declarations: [
@@ -21,8 +20,7 @@ import { InputModule } from 'app/input/input.module';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    MessageModule,
-    InputModule,
+    MessageModule
   ],
 })
 export class LoginModule {}
