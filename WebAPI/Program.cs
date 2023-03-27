@@ -1,4 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using WebAPI.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AreaInstedContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("AreaInstedConnection")));
+
 
 // Add services to the container.
 
@@ -12,8 +19,8 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+  app.UseSwagger();
+  app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
