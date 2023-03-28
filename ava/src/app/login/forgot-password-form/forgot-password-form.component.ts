@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CustomValidations } from '../../validators.component';
-import { LoginInterface } from '../login.interface';
-
+import { catchError, throwError } from 'rxjs';
+import { ForgotPasswordService } from './forgot-password.service';
 @Component({
   selector: 'app-forgot-password-form',
   templateUrl: './forgot-password-form.component.html',
@@ -16,7 +16,10 @@ export class ForgotPasswordFormComponent implements OnInit {
   cpf = '' as string;
   someInputFilled = false as boolean;
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private recoverPasswordService: ForgotPasswordService
+  ) {}
 
   ngOnInit(): void {
     this.forgotPasswordForm = this.formBuilder.group({
@@ -26,11 +29,39 @@ export class ForgotPasswordFormComponent implements OnInit {
     });
   }
 
-  recoverPassword() {
-    const recoverPassword =
-      this.forgotPasswordForm.getRawValue() as LoginInterface;
-    console.log(CustomValidations.validateCpf);
+  RecoverPassword() {
+    let recoverField = '';
+    let fieldType = '';
+
+    if (this.forgotPasswordForm.get('ra')?.value) {
+      recoverField = this.forgotPasswordForm.get('ra')?.value;
+      fieldType = 'ra';
+    } else if (this.forgotPasswordForm.get('email')?.value) {
+      recoverField = this.forgotPasswordForm.get('email')?.value;
+      fieldType = 'email';
+    } else if (this.forgotPasswordForm.get('cpf')?.value) {
+      recoverField = this.forgotPasswordForm.get('cpf')?.value;
+      fieldType = 'cpf';
+    }
+
+    this.recoverPasswordService
+      .getUserOnSystem(fieldType, recoverField)
+      .pipe(
+        catchError((error) => {
+          console.error(error);
+          return throwError(() => new Error(error));
+        })
+      )
+      .subscribe({
+        next: (response: object) => {
+          console.log('e-mail do usuário: ', response.toString());
+        },
+        error: (error: any) => {
+          console.error(error);
+        },
+      });
   }
+
   verificarInputs(e: KeyboardEvent) {
     if (this.ra != '' || this.email != '' || this.cpf != '') {
       this.someInputFilled = true;

@@ -1,4 +1,4 @@
-﻿using connectionDB.Models;
+﻿using WebAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace WebAPI.Data;

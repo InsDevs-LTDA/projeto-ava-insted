@@ -1,12 +1,13 @@
-using connectionDB.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using WebAPI.Data;
+using WebAPI.Models;
 
 namespace WebAPI.Controllers
 {
 
     [ApiController]
-    [Route("[controller]")]
+    [Route("user")]
 
     public class AreaInstedController : ControllerBase
     {
@@ -17,14 +18,14 @@ namespace WebAPI.Controllers
             _context = context;
         }
 
-        [HttpGet]
+        [HttpGet("get-users")]
         public IEnumerable<TbUser> GetUser([FromQuery] int skip = 0, [FromQuery] int take = 15)
 
         {
-            return _context.TbUsers.Skip(skip).Take(take);
+            return (IEnumerable<TbUser>)_context.TbUsers.Skip(skip).Take(take);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("get-users/{id}")]
         public IActionResult GetUserByID(int id)
         {
             var user = _context.TbUsers.FirstOrDefault(a => a.IdUser == id);
@@ -36,30 +37,30 @@ namespace WebAPI.Controllers
             return Ok(user);
         }
 
-
-
-        [HttpPost]
-        public IActionResult AddUser([FromBody] TbUser user)
+        [HttpGet("recover-password/{col}/{recoverField}")]
+        public async Task<IActionResult> RecoverPassword(string recoverField, string col)
         {
-            try
+            var properties = new Dictionary<string, string>
             {
-                _context.TbUsers.Add(user);
-                _context.SaveChanges();
-                return CreatedAtAction(nameof(GetUserByID), new
-                {
-                    id =
-                    user.IdUser
-                },
-                    user
-                    );
+            { "ra", "NrRegister" },
+            { "cpf", "NrCpf" },
+            { "email", "NmEmail" }
+        };
 
-            }
-            catch (Exception ex)
+            if (!properties.TryGetValue(col, out string propertyName))
             {
-                return StatusCode(500, new { error = "Erro ao criar usuário. " + ex.Message });
-
+                return BadRequest("Coluna inválida.");
             }
+
+            var user = await _context.TbUsers.SingleOrDefaultAsync(u => EF.Property<string>(u, propertyName) == recoverField);
+
+            if (user == null)
+            {
+                return NotFound("Usuário não encontrado.");
+            }
+            return Ok(new { user.NmEmail });
         }
+
 
     }
 }

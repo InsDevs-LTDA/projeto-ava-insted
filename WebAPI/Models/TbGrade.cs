@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace connectionDB.Models
+namespace WebAPI.Models
 {
     public partial class TbGrade
     {

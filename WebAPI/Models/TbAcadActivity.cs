@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace connectionDB.Models
+namespace WebAPI.Models
 {
     public class TbAcadActivity
     {
