@@ -61,6 +61,27 @@ namespace WebAPI.Controllers
             return Ok(new { user.NmEmail });
         }
 
+        [HttpPost("login")]
+        public async Task<IActionResult> Authenticate([FromForm] string userName, [FromForm] string password)
+        {
+            var user = await _context.TbUsers.SingleOrDefaultAsync(u => u.NmUser == userName && u.NmPassword == password);
+
+            if (user == null)
+            {
+                return Unauthorized("Usuário ou senha inválidos.");
+            }
+
+            var token = GenerateToken(user);
+            return Ok(new { token });
+        }
+
+        private string GenerateToken(TbUser user)
+        {
+            // Implemente aqui a lógica para gerar um token de acesso válido para o usuário
+            return "meu_token_gerado";
+        }
+
 
     }
+
 }

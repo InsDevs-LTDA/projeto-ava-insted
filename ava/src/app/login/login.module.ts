@@ -1,3 +1,4 @@
+import { AutenticationService } from './../autentication/autentication.service';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { NgModule } from '@angular/core';
@@ -24,6 +25,6 @@ import { ForgotPasswordService } from './forgot-password-form/forgot-password.se
     ReactiveFormsModule,
     MessageModule,
     HttpClientModule
-  ],providers: [ForgotPasswordService],
+  ],providers: [ForgotPasswordService, AutenticationService],
 })
 export class LoginModule {}
