@@ -1,6 +1,6 @@
 export interface LoginInterface {
-  ra: string;
-  senha: string;
-  email: string;
-  cpf: string;
+  ra?: string;
+  senha?: string;
+  email?: string;
+  cpf?: string;
 }

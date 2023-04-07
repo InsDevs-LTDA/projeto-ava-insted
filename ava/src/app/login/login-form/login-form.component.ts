@@ -1,6 +1,7 @@
+import { AutenticationService } from './../../autentication/autentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoginInterface } from '../login.interface';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -8,19 +9,34 @@ import { LoginInterface } from '../login.interface';
 export class LoginFormComponent implements OnInit {
   loginForm!: FormGroup; //É estânciado no OnInit
 
-  constructor(private formBuilder: FormBuilder) {}
+  ra = '' as string;
+  password = '' as string;
+
+  constructor(
+    private authService: AutenticationService,
+    private formBuilder: FormBuilder,
+    private router: Router
+  ) {}
+
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
       ra: ['', [Validators.required, Validators.minLength(10)]],
-      senha: ['', [Validators.required]],
+      password: ['', [Validators.required]],
+    });
+  }
+  Login() {
+    this.authService.autenticate(this.ra, this.password).subscribe({
+      next: () => {
+        this.router.navigate(['home']);
+      },
+      error: (error) => {
+        alert('Usuário ou senha inválido');
+        console.log(error);
+      },
     });
   }
 
-  logar() {
-    const logar = this.loginForm.getRawValue() as LoginInterface;
-  }
-
-  toggleIcon(event: MouseEvent) {
+  ToggleIcon(event: MouseEvent) {
     event.preventDefault(); // Interrompe o comportamento padrão do navegador
     let password = document.getElementById('password') as HTMLInputElement;
     let icon = document.getElementById('icon');

@@ -1,3 +1,4 @@
+import { AutenticationService } from './../autentication/autentication.service';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { NgModule } from '@angular/core';
@@ -7,6 +8,8 @@ import { ForgotPasswordFormComponent } from './forgot-password-form/forgot-passw
 import { ReactiveFormsModule } from '@angular/forms';
 import { MessageModule } from '../message/message.module';
 import { InputRestrictionDirective } from 'app/input-restriction.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { ForgotPasswordService } from './forgot-password-form/forgot-password.service';
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import { InputRestrictionDirective } from 'app/input-restriction.directive';
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    MessageModule
-  ],
+    MessageModule,
+    HttpClientModule
+  ],providers: [ForgotPasswordService, AutenticationService],
 })
 export class LoginModule {}
