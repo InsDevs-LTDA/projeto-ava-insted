@@ -1,7 +1,10 @@
+import { LoginService } from './login-form.service';
 import { AutenticationService } from './../../autentication/autentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
+import { catchError, finalize, of, tap } from 'rxjs';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -15,8 +18,9 @@ export class LoginFormComponent implements OnInit {
   constructor(
     private authService: AutenticationService,
     private formBuilder: FormBuilder,
-    private router: Router
-  ) {}
+    private router: Router,
+    private loginService: LoginService
+  ) { }
 
   ngOnInit(): void {
     this.loginForm = this.formBuilder.group({
@@ -25,16 +29,31 @@ export class LoginFormComponent implements OnInit {
     });
   }
   Login() {
-    this.authService.autenticate(this.ra, this.password).subscribe({
-      next: () => {
-        this.router.navigate(['home']);
+    const loginRequest = {
+      "ra": this.loginForm.get('ra')?.value,
+      "password": this.loginForm.get('password')?.value
+    }
+    console.log("RA", loginRequest.ra, "Senha", loginRequest.password)
+
+    this.loginService.login(loginRequest).subscribe({
+      next: (response) => {
+        if (response.success) {
+          console.log(response.token);
+          // Do something with the token, e.g. store it in local storage
+        } else {
+          throw new Error(response.message);
+        }
       },
       error: (error) => {
-        alert('Usuário ou senha inválido');
-        console.log(error);
-      },
+        console.error('Failed to login', error);
+        // Handle the error, e.g. display an error message to the user
+      }
     });
+
+
+
   }
+
 
   ToggleIcon(event: MouseEvent) {
     event.preventDefault(); // Interrompe o comportamento padrão do navegador
