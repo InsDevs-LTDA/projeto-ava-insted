@@ -9,7 +9,12 @@ namespace WebAPI.Controllers
     [ApiController]
     [Route("user")]
 
-   
+    public class LoginRequest
+    {
+        public string Ra { get; set; }
+        public string Password { get; set; }
+    }
+
 
     public class AreaInstedController : ControllerBase
     {
@@ -109,12 +114,13 @@ namespace WebAPI.Controllers
             return Ok(new { user.NmEmail });
         }
 
+    
         [HttpPost("login")]
-        public async Task<IActionResult> Authenticate([FromForm] string ra, [FromForm] string password)
+        public async Task<IActionResult> Authenticate([FromBody] LoginRequest loginRequest)
         {
             try
             {
-                var user = await _context.TbUsers.SingleOrDefaultAsync(u => u.NrRegister == ra && u.NmPassword == password);
+                var user = await _context.TbUsers.SingleOrDefaultAsync(u => u.NrRegister == loginRequest.Ra && u.NmPassword == loginRequest.Password);
 
                 if (user == null)
                 {
@@ -127,14 +133,19 @@ namespace WebAPI.Controllers
                     nome = user.NmUser,
                     email = user.NmEmail
                 };
-
-                return Ok(new { success = true, data = userResponse });
+                return Ok(new
+                {
+                    Success = true,
+                    Message = "Login successful.",
+                    Token = "48af6sf4a6884a6g84aeg51aeg6a84g5ag4e68a4ga84ga32s1vas56b4sa8"
+                });
             }
             catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, new { message = "Ocorreu um erro ao tentar autenticar o usuário." });
             }
         }
+
 
 
         [HttpDelete("delete-user/{id}")]
