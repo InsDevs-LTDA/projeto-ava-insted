@@ -100,11 +100,11 @@ namespace WebAPI.Controllers
             { "email", "NmEmail" }
         };
 
-            if (!properties.TryGetValue(col, out string propertyName))
             {
                 return BadRequest("Coluna inválida.");
             }
 
+            string propertyName = null;
             var user = await _context.TbUsers.SingleOrDefaultAsync(u => EF.Property<string>(u, propertyName) == recoverField);
 
             if (user == null)
@@ -114,7 +114,7 @@ namespace WebAPI.Controllers
             return Ok(new { user.NmEmail });
         }
 
-    
+
         [HttpPost("login")]
         public async Task<IActionResult> Authenticate([FromBody] LoginRequest loginRequest)
         {

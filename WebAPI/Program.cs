@@ -14,12 +14,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddCors(options => options.AddPolicy(name: "AreaInstedOrigins",
-        Policy =>
-        {
-            Policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin().AllowCredentials();
+    Policy =>
+    {
+        Policy.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader().AllowCredentials();
+    }
+));
 
-        }
-    ));
 
 var app = builder.Build();
 
