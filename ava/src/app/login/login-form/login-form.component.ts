@@ -1,10 +1,8 @@
-import { LoginService } from './login-form.service';
+
 import { AutenticationService } from './../../autentication/autentication.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
-import { catchError, finalize, of, tap } from 'rxjs';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -19,7 +17,6 @@ export class LoginFormComponent implements OnInit {
     private authService: AutenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
-    private loginService: LoginService
   ) { }
 
   ngOnInit(): void {
@@ -35,10 +32,11 @@ export class LoginFormComponent implements OnInit {
     }
     console.log("RA", loginRequest.ra, "Senha", loginRequest.password)
 
-    this.loginService.login(loginRequest).subscribe({
+    this.authService.authService(loginRequest).subscribe({
       next: (response) => {
         if (response.success) {
           console.log(response.token);
+          this.router.navigate(['/home']);
           // Do something with the token, e.g. store it in local storage
         } else {
           throw new Error(response.message);

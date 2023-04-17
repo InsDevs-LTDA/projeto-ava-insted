@@ -10,7 +10,6 @@ import { MessageModule } from '../message/message.module';
 import { InputRestrictionDirective } from 'app/input-restriction.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { ForgotPasswordService } from './forgot-password-form/forgot-password.service';
-import { LoginService } from './login-form/login-form.service';
 
 @NgModule({
   declarations: [
@@ -26,6 +25,6 @@ import { LoginService } from './login-form/login-form.service';
     ReactiveFormsModule,
     MessageModule,
     HttpClientModule
-  ],providers: [ForgotPasswordService, AutenticationService, LoginService],
+  ],providers: [ForgotPasswordService, AutenticationService],
 })
 export class LoginModule {}

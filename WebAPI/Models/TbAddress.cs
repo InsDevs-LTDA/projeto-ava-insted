@@ -30,7 +30,8 @@ namespace WebAPI.Models
         [MaxLength(50)]
         public string? NmComplement { get; set; }
 
-        public int? NrZipCode { get; set; }
+        [MaxLength(8)]
+        public string NrZipCode { get; set; }
 
         public virtual ICollection<TbUser> TbUsers { get; set; } = new List<TbUser>();
     }
