@@ -36,7 +36,7 @@ export class LoginFormComponent implements OnInit {
       next: (response) => {
         if (response.success) {
           console.log(response.token);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/perfil']);
           // Do something with the token, e.g. store it in local storage
         } else {
           throw new Error(response.message);
