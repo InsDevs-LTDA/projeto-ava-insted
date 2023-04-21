@@ -1,20 +1,23 @@
-import { UserService } from 'app/autentication/user/user.service';
-import { Component, OnInit } from '@angular/core';
-import { Pessoa } from 'app/autentication/user/Pessoa.interface';
+import { UserService } from '../autentication/user/user.service';
+import { Component } from '@angular/core';
+import { Pessoa } from '../autentication/user/Pessoa.interface';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
 })
-export class ProfileComponent implements OnInit {
-  user$ = this.userService.getUser();
+export class ProfileComponent {
+  user = null as Pessoa["user"];
 
   constructor(private userService: UserService) {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
+    console.log(this.user, "aff");
+    this.userService.getUser().subscribe(user => {
+      this.user = user;
+    });
   }
-
 }

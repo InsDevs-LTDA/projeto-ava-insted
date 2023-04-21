@@ -1,24 +1,22 @@
 import { Pessoa } from './Pessoa.interface';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
 
-  private userSubject = new BehaviorSubject<Pessoa["user"]>(null);
+  private userSubject = new Subject<Pessoa["user"]>();
 
-  constructor() { this.userSubject.subscribe(user => {
-    console.log("quando o user atualiza : " + user?.nrCpf);
-  });}
+  constructor() { }
 
   setUser(user: Pessoa["user"]) {
-    console.log("chamado o setUser", user?.nmUser)
     this.userSubject.next(user);
+    this.userSubject.subscribe(user => { console.log(user) })
   }
 
   getUser() {
-    return this.userSubject.asObservable();
+    return this.userSubject;
   }
 }
