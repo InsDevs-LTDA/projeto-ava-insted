@@ -3,6 +3,7 @@ import { AutenticationService } from './../../autentication/autentication.servic
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { UserService } from 'app/autentication/user/user.service';
 @Component({
   selector: 'app-login-form',
   templateUrl: './login-form.component.html',
@@ -17,6 +18,7 @@ export class LoginFormComponent implements OnInit {
     private authService: AutenticationService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private userService: UserService
   ) { }
 
   ngOnInit(): void {
@@ -30,11 +32,13 @@ export class LoginFormComponent implements OnInit {
       "login": this.loginForm.get('ra')?.value,
       "password": this.loginForm.get('password')?.value
     }
-
     this.authService.auth(loginRequest).subscribe({
       next: (response) => {
         if (response.success) {
+          console.log(response.message)
+          this.userService.setUser(response.user);
           this.router.navigate(['/perfil']);
+
         } else {
           throw new Error(response.message);
         }

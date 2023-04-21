@@ -138,7 +138,8 @@ namespace WebAPI.Controllers
                 return Ok(new
                 {
                     success = true,
-                    user = new { user},
+                    message="Usuário logado com sucesso!",
+                    user =  user,
                     token = token
                 });
             }

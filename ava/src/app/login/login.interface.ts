@@ -1,3 +1,5 @@
+import { Pessoa } from "app/autentication/user/Pessoa.interface";
+
 export interface LoginInterface {
   login: {
     ra?: string;
@@ -10,5 +12,6 @@ export interface LoginInterface {
 export interface ResponseInterface {
   success: boolean;
   message: string;
-  token: string
+  token: string;
+  user: Pessoa['user']
 }

@@ -6,12 +6,11 @@ import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
-  declarations: [		AppComponent,
-      HomeComponent,
-      ProfileComponent
-   ],
+  declarations: [AppComponent,
+    HomeComponent, ProfileComponent
+  ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

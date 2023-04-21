@@ -1,40 +1,24 @@
-import { User } from './user';
-import { TokenService } from './../token.service';
+import { Pessoa } from './Pessoa.interface';
 import { Injectable } from '@angular/core';
-import jwt_decode from 'jwt-decode';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  constructor(private tokenService: TokenService) {
-    if (this.tokenService.HasToken()) {
-      this.decodeJWT();
-    }
-  }
 
-  private userSubject = new BehaviorSubject<User>({});
+  private userSubject = new BehaviorSubject<Pessoa["user"]>(null);
 
-  private decodeJWT() {
-    const token = this.tokenService.GetToken();
-    const user = jwt_decode(token) as User;
+  constructor() { this.userSubject.subscribe(user => {
+    console.log("quando o user atualiza : " + user?.nrCpf);
+  });}
+
+  setUser(user: Pessoa["user"]) {
+    console.log("chamado o setUser", user?.nmUser)
     this.userSubject.next(user);
   }
 
-  GetUser() {
+  getUser() {
     return this.userSubject.asObservable();
-  }
-
-  SaveToken(token: string) {
-    this.tokenService.SaveToken(token);
-    this.decodeJWT();
-  }
-  Logout() {
-    this.tokenService.DeleteToken();
-    this.userSubject.next({});
-  }
-  Islogged() {
-    return this.tokenService.HasToken();
   }
 }

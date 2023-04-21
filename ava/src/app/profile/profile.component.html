@@ -1,6 +1,8 @@
-<main class="flex justify-start flex-col items-center bg-green_insted min-h-[100svh] bg-gradient-to-b from-green_insted via-green_insted to-white">
+<main
+  class="flex justify-start flex-col items-center bg-green_insted min-h-[100svh] bg-gradient-to-b from-green_insted via-green_insted to-white"
+>
   <section
-    class=" bg-white my-2 w-[calc(100vw-18px)] py-2 rounded-2xl shadow-md"
+    class="bg-white my-2 w-[calc(100vw-18px)] py-2 rounded-2xl shadow-md"
   >
     <div class="flex flex-row justify-center">
       <div class="relative aspect-square w-4/12 m-2">
@@ -17,9 +19,9 @@
         <div
           class="bg-green_insted_transp text-sm text-center text-verde-texto p-2 rounded-2xl w-fit"
         >
-          <p class="font-semibold">RA - 1010001580</p>
+          <p class="font-semibold" *ngIf="user$ | async as user">RA - {{ user.nrRegister }}</p>
         </div>
-        <h2 class="text-2xl font-bold pr-2">Pedro Almeida</h2>
+        <h2 class="text-2xl font-bold pr-2"></h2>
       </div>
     </div>
 
@@ -29,7 +31,7 @@
     </div>
   </section>
   <section
-    class="bg-white  w-[calc(100vw-18px)] my-2 rounded-2xl shadow-md animate-abrir"
+    class="bg-white w-[calc(100vw-18px)] my-2 rounded-2xl shadow-md animate-abrir"
   >
     <div class="px-2 py-1">
       <h1 class="text-verde-texto text-2xl font-bold">Informações pessoais</h1>
@@ -80,9 +82,7 @@
     <button class="w-full flex justify-center"></button>
   </section>
 
-  <section
-    class="bg-white w-[calc(100vw-18px)] rounded-2xl my-2 shadow-md"
-  >
+  <section class="bg-white w-[calc(100vw-18px)] rounded-2xl my-2 shadow-md">
     <div class="px-2 py-1">
       <h1 class="text-2xl font-bold text-verde-texto">Curso</h1>
     </div>
