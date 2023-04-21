@@ -137,6 +137,7 @@ namespace WebAPI.Controllers
                 user.NmPassword = "";
                 return Ok(new
                 {
+                    success = true,
                     user = new { user},
                     token = token
                 });

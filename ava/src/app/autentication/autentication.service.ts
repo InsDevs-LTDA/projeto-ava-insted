@@ -14,17 +14,12 @@ export class AutenticationService {
 
   constructor(private http: HttpClient) { }
 
-  authService(loginRequest: LoginInterface): Observable<ResponseInterface> {
+  auth(loginRequest: LoginInterface): Observable<ResponseInterface> {
     const json = {
-      "ra": loginRequest.ra as string,
+      "login": loginRequest.login as string,
       "password": loginRequest.password as string
     }
-    const loginUrl = `${this.apiUrl}login`;
+    const loginUrl = `${this.apiUrl}user/auth`;
     return this.http.post<ResponseInterface>(`${loginUrl}`, json)
   }
-
-  logout(): void {
-    localStorage.removeItem('token'); // Remove o token armazenado na memória
-  }
-
 }

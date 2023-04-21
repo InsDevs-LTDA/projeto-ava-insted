@@ -27,31 +27,23 @@ export class LoginFormComponent implements OnInit {
   }
   Login() {
     const loginRequest = {
-      "ra": this.loginForm.get('ra')?.value,
+      "login": this.loginForm.get('ra')?.value,
       "password": this.loginForm.get('password')?.value
     }
-    console.log("RA", loginRequest.ra, "Senha", loginRequest.password)
 
-    this.authService.authService(loginRequest).subscribe({
+    this.authService.auth(loginRequest).subscribe({
       next: (response) => {
         if (response.success) {
-          console.log(response.token);
           this.router.navigate(['/perfil']);
-          // Do something with the token, e.g. store it in local storage
         } else {
           throw new Error(response.message);
         }
       },
       error: (error) => {
         console.error('Failed to login', error);
-        // Handle the error, e.g. display an error message to the user
       }
     });
-
-
-
   }
-
 
   ToggleIcon(event: MouseEvent) {
     event.preventDefault(); // Interrompe o comportamento padrão do navegador
