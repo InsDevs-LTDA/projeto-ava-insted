@@ -7,16 +7,10 @@ import { BehaviorSubject, Subject } from 'rxjs';
 })
 export class UserService {
 
-  private userSubject = new Subject<Pessoa["user"]>();
-
   constructor() { }
 
   setUser(user: Pessoa["user"]) {
-    this.userSubject.next(user);
-    this.userSubject.subscribe(user => { console.log(user) })
-  }
+    localStorage.setItem(user.nrCpf,JSON.stringify(user));
 
-  getUser() {
-    return this.userSubject;
   }
 }

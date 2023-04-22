@@ -1,27 +1,34 @@
 <main
-  class="flex justify-start flex-col items-center bg-green_insted min-h-[100svh] bg-gradient-to-b from-green_insted via-green_insted to-white"
+  class="flex justify-start flex-col items-center bg-green_insted min-h-[100svh] bg-gradient-to-b from-green_insted via-white to-white"
 >
   <section
     class="bg-white my-2 w-[calc(100vw-18px)] py-2 rounded-2xl shadow-md"
   >
-    <div class="flex flex-row justify-center">
+    <div class="flex flex-row justify-around">
       <div class="relative aspect-square w-4/12 m-2">
         <img
           src="assets/images/perfil-padrao1.png"
           class="rounded-[50%] aspect-square object-cover"
         />
-        <img
-          src="assets/images/botao-editar.png"
-          class="absolute w-4/12 bottom-0 left-0"
-        />
+        <span
+          class="material-icons absolute w-4/12 bottom-0 left-0 bg-green_insted rounded-full aspect-square flex justify-center items-center text-3xl"
+        >
+          edit
+        </span>
       </div>
       <div class="flex flex-col justify-center">
         <div
           class="bg-green_insted_transp text-sm text-center text-verde-texto p-2 rounded-2xl w-fit"
         >
-        <p class="font-semibold">RA - {{user?.nrRegister}}</p>
+          <p class="font-semibold m-0">RA - {{ user.nrRegister }}</p>
         </div>
-        <h2 class="text-2xl font-bold pr-2"></h2>
+        <h2 class="text-2xl font-bold pr-2">{{ user.nmUser }}</h2>
+      </div>
+      <div
+        (click)="logout()"
+        class="h-fit flex justify-center active:bg-green_insted rounded-md"
+      >
+        <span class="material-icons text-green_insted"> logout </span>
       </div>
     </div>
 
@@ -42,9 +49,9 @@
       <div class="flex flex-col justify-start">
         <h3 class="text-xl px-1">Nome :</h3>
         <p
-          class="flex justify-center items-center font-semibold text-verde-texto p-2 w-full rounded-2xl my-1 bg-green_insted_transp"
+          class="flex justify-center items-center font-semibold p-2 w-full rounded-2xl my-1 bg-green_insted_transp"
         >
-          Pedro Henrique Souza de Almeida
+          {{ user.nmUser }}
         </p>
       </div>
       <div class="flex flex-row justify-start items-center">
@@ -52,7 +59,7 @@
         <p
           class="flex justify-center items-center font-semibold text-verde-texto p-2 w-full rounded-2xl my-1 bg-green_insted_transp"
         >
-          21/07/01
+          {{ user.dtBirthdate | date : "dd/MM/yyyy" }}
         </p>
       </div>
       <div class="flex flex-col">
@@ -61,12 +68,12 @@
           <div
             class="flex justify-center items-center font-semibold text-verde-texto p-2 rounded-2xl my-1 w-full bg-green_insted_transp"
           >
-            <p>(67) 9.9235 - 9356</p>
+            <p>{{ user.nmPhone1 }}</p>
           </div>
           <div
             class="flex justify-center items-center font-semibold text-verde-texto p-2 rounded-2xl my-1 w-full bg-green_insted_transp"
           >
-            <p>(67) 9.9235 - 9356</p>
+            <p>{{ user.nmPhone2 }}</p>
           </div>
         </div>
       </div>
@@ -75,7 +82,7 @@
         <p
           class="flex justify-center items-center font-semibold text-verde-texto p-2 w-full rounded-2xl my-1 bg-green_insted_transp"
         >
-          p.almeida@live.com
+          {{ user.nmEmail }}
         </p>
       </div>
     </div>
