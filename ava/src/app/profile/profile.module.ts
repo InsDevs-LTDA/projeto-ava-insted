@@ -6,11 +6,11 @@ import { RouterModule } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { ProfileComponent } from './profile.component';
 import { UserService } from 'app/autentication/user/user.service';
-import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MaterialModule } from 'app/material/material.module';
 
 @NgModule({
   declarations: [ProfileComponent],
-  imports: [CommonModule, RouterModule, MatSlideToggleModule, MatIconModule],
+  imports: [CommonModule, RouterModule, MaterialModule],
   exports: [ProfileComponent],
   providers: [UserService, AutenticationService]
 })

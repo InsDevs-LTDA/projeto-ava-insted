@@ -11,7 +11,7 @@
           class="rounded-[50%] aspect-square object-cover"
         />
         <span
-          class="material-icons absolute w-4/12 bottom-0 left-0 bg-green_insted rounded-full aspect-square flex justify-center items-center text-3xl"
+          class="material-icons absolute w-4/12 bottom-0 left-0 text-text_color shadow-md bg-green_insted rounded-full aspect-square flex justify-center items-center text-3xl"
         >
           edit
         </span>
@@ -26,19 +26,21 @@
       </div>
       <div
         (click)="logout()"
-        class="h-fit flex justify-center active:bg-green_insted rounded-md"
+        class="h-fit flex justify-center hover:bg-green_insted active:bg-green_insted rounded-md"
       >
-        <span class="material-icons text-green_insted"> logout </span>
+        <span class="material-icons text-green_insted hover:text-white">
+          logout
+        </span>
       </div>
     </div>
 
     <div class="flex justify-center text-centerrounded-2xl items-center">
-      <img src="assets/images/mapa.png " class="w-7 px-1" />
+      <span class="material-icons text-text_color">location_on</span>
       <p class="text-md">Campo Grande, MS</p>
     </div>
   </section>
-  <section
-    class="bg-white w-[calc(100vw-18px)] my-2 rounded-2xl shadow-md animate-abrir"
+  <mat-accordion
+    class="bg-white w-[calc(100vw-18px)] my-2 rounded-2xl shadow-md"
   >
     <div class="px-2 py-1">
       <h1 class="text-verde-texto text-2xl font-bold">Informações pessoais</h1>
@@ -77,17 +79,29 @@
           </div>
         </div>
       </div>
-      <div class="flex flex-row justify-start items-center">
-        <h3 class="text-xl px-1 whitespace-nowrap">E-mail :</h3>
-        <p
-          class="flex justify-center items-center font-semibold text-verde-texto p-2 w-full rounded-2xl my-1 bg-green_insted_transp"
-        >
-          {{ user.nmEmail }}
-        </p>
-      </div>
+      <mat-expansion-panel
+        ><mat-expansion-panel-header
+          class=" text-text_color flex-col"
+        ></mat-expansion-panel-header>
+        <div class="flex flex-row justify-start items-center">
+          <h3 class="text-xl px-1 whitespace-nowrap">E-mail :</h3>
+          <p
+            class="flex justify-center items-center font-semibold text-verde-texto p-2 w-full rounded-2xl my-1 bg-green_insted_transp"
+          >
+            {{ user.nmEmail }}
+          </p>
+        </div>
+        <div class="flex flex-row justify-start items-center">
+          <h3 class="text-xl px-1 whitespace-nowrap">CPF :</h3>
+          <p
+            class="flex justify-center items-center font-semibold text-verde-texto p-2 w-full rounded-2xl my-1 bg-green_insted_transp"
+          >
+            {{ user.nrCpf }}
+          </p>
+        </div></mat-expansion-panel
+      >
     </div>
-    <button class="w-full flex justify-center"></button>
-  </section>
+  </mat-accordion>
 
   <section class="bg-white w-[calc(100vw-18px)] rounded-2xl my-2 shadow-md">
     <div class="px-2 py-1">

@@ -8,7 +8,9 @@ input[type="password"]::-ms-reveal,
 input[type="password"]::-webkit-contacts-auto-fill-button {
   display: none;
 }
-
+.mat-expansion-panel-header {
+  flex-direction: column !important;
+}
 * {
   font-family: "Lexend Deca", sans-serif;
 }

@@ -12,6 +12,7 @@ module.exports = {
       },
     },
     colors: {
+      text_color: "rgb(6, 59, 61)",
       green_insted: "rgba(29, 169, 173,1)",
       green_insted_transp: "rgb(29, 169, 173,0.65)",
       white: "rgb(244, 242, 255)",
