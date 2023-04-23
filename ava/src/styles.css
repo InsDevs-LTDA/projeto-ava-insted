@@ -9,11 +9,39 @@ input[type="password"]::-webkit-contacts-auto-fill-button {
   display: none;
 }
 .mat-expansion-panel-header {
-  flex-direction: column !important;
 }
 * {
   font-family: "Lexend Deca", sans-serif;
 }
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+button {
+  background-color: rgb(29, 169, 173) !important;
+  position: relative;
+  overflow: hidden;
+  border-color: rgb(244, 242, 255);
+  border-width: 2px;
+  width: 50%;
+  border-radius: 3em;
+  padding: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: rgb(244, 242, 255);
+}
+button.cancelar{
+  background-color: rgb(209, 69, 73) !important;
+}
+button.float{
+  position:inherit;
+}
+
 input {
   color: transparent;
   outline: none;
@@ -50,12 +78,6 @@ app-forgot-password-form {
   background-position: center;
   transition: 0.25s ease-in all;
 }
+mat-expansion-panel-header{
 
-html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
