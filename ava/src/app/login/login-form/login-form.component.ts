@@ -12,9 +12,11 @@ import { finalize } from 'rxjs';
 })
 export class LoginFormComponent implements OnInit {
   loginForm!: FormGroup; //É estânciado no OnInit
-
+  loginError = false as boolean
   ra = '' as string;
   password = '' as string;
+  isUserValid = true;
+  errorMessage = "";
 
   constructor(
     private authService: AutenticationService,
@@ -37,21 +39,24 @@ export class LoginFormComponent implements OnInit {
     this.authService.auth(loginRequest).subscribe({
       next: (response) => {
         if (response.success) {
-          console.log(response.message)
           this.userService.setUser(response.user);
           this.router.navigate(['/perfil']);
-
-        } else {
-          throw new Error(response.message);
         }
       },
       error: (error) => {
-        console.error('Failed to login', error);
+        if (error.status === 500) {
+          this.isUserValid = false
+          this.errorMessage = "Erro de conexão com o servidor."
+        } else if (error.status === 404) {
+          this.isUserValid = false
+          this.errorMessage = "Usuário ou senha inválidos."
+        } else {
+          console.error('Failed to login', error);
+        }
       }
-    }
-    // finalize: () => { }
-    );
+    });
   }
+
 
   ToggleIcon(event: MouseEvent) {
     event.preventDefault(); // Interrompe o comportamento padrão do navegador
