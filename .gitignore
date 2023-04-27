@@ -349,4 +349,5 @@ MigrationBackup/
 .ionide/
 
 .angular
+./WebAPI/appsettings.json
 WebAPI/appsettings.json

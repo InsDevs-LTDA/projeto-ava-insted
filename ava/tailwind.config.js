@@ -14,6 +14,7 @@ module.exports = {
     colors: {
       text_color: "rgb(6, 59, 61)",
       header_color: "rgb(22, 149, 153)",
+      okay_button: "rgb(22, 129, 193)",
       green_insted: "#1da9ad",
       green_insted_transp: "rgba(29, 169, 173, 0.651)",
       white: "rgb(244, 242, 255)",
