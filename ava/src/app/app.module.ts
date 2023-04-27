@@ -9,9 +9,10 @@ import { MaterialModule } from './material/material.module';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoadingInterceptor } from './interceptors/loading.interceptor';
+import { CustomSwiperModule } from './swiper/swiper.module';
 @NgModule({
   declarations: [AppComponent, LoadingComponent],
-  imports: [CommonModule, BrowserModule, AppRoutingModule, ProfileModule, BrowserAnimationsModule, MaterialModule],
+  imports: [CommonModule, BrowserModule, AppRoutingModule, ProfileModule, BrowserAnimationsModule, MaterialModule, CustomSwiperModule],
   providers: [{
     provide: HTTP_INTERCEPTORS,
     useClass: LoadingInterceptor,

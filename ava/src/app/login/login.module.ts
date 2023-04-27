@@ -28,7 +28,6 @@ import { LoadingInterceptor } from 'app/interceptors/loading.interceptor';
     ReactiveFormsModule,
     MessageModule,
     HttpClientModule,
-    MaterialModule
   ], providers: [ForgotPasswordService, AutenticationService, UserService,
   ]
 })
